@@ -1,0 +1,46 @@
+|--- failures <= 0.50
+|   |--- higher_yes <= 0.50
+|   |   |--- value: [6.60]
+|   |--- higher_yes >  0.50
+|   |   |--- Mjob_at_home <= 0.50
+|   |   |   |--- Fjob_teacher <= 0.50
+|   |   |   |   |--- goout <= 2.50
+|   |   |   |   |   |--- value: [12.97]
+|   |   |   |   |--- goout >  2.50
+|   |   |   |   |   |--- value: [11.24]
+|   |   |   |--- Fjob_teacher >  0.50
+|   |   |   |   |--- reason_course <= 0.50
+|   |   |   |   |   |--- value: [14.00]
+|   |   |   |   |--- reason_course >  0.50
+|   |   |   |   |   |--- value: [16.44]
+|   |   |--- Mjob_at_home >  0.50
+|   |   |   |--- health <= 2.50
+|   |   |   |   |--- health <= 1.50
+|   |   |   |   |   |--- value: [14.43]
+|   |   |   |   |--- health >  1.50
+|   |   |   |   |   |--- value: [11.80]
+|   |   |   |--- health >  2.50
+|   |   |   |   |--- Fjob_other <= 0.50
+|   |   |   |   |   |--- value: [4.12]
+|   |   |   |   |--- Fjob_other >  0.50
+|   |   |   |   |   |--- value: [10.23]
+|--- failures >  0.50
+|   |--- absences <= 1.00
+|   |   |--- goout <= 4.50
+|   |   |   |--- age <= 16.50
+|   |   |   |   |--- value: [2.44]
+|   |   |   |--- age >  16.50
+|   |   |   |   |--- value: [0.00]
+|   |   |--- goout >  4.50
+|   |   |   |--- value: [5.67]
+|   |--- absences >  1.00
+|   |   |--- studytime <= 2.50
+|   |   |   |--- Mjob_at_home <= 0.50
+|   |   |   |   |--- romantic_yes <= 0.50
+|   |   |   |   |   |--- value: [8.40]
+|   |   |   |   |--- romantic_yes >  0.50
+|   |   |   |   |   |--- value: [10.80]
+|   |   |   |--- Mjob_at_home >  0.50
+|   |   |   |   |--- value: [10.67]
+|   |   |--- studytime >  2.50
+|   |   |   |--- value: [13.00]
