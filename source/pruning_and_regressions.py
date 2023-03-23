@@ -87,7 +87,7 @@
 
 # Step 1: Inspecting the mathematics course grades dataset
 
-# In[11]:
+# In[13]:
 
 
 import pandas as pd
@@ -154,25 +154,30 @@ print("The number of students in the Portuguese data after pruning is : ", len(d
 
 # Step 2: Plotting histograms for df1 numerical variables
 
-# In[3]:
+# In[28]:
 
 
 # Get the numerical columns
-numerical_col_names1 = ['absences']
-numerical_cols1 = df1[numerical_col_names1].columns.tolist()
+numerical_col_names1 = ['absences', 'G1', 'G2', 'G3']
 
 # Plot histograms for numerical variables
-df1[numerical_cols1].hist(bins=20, figsize=(10,5), grid=False)
+df1['absences'].hist(bins=20, figsize=(6,3), grid=False)
+plt.xlabel("Absences")
+plt.ylabel("Frequency")
+plt.title("Histogram of Absences")
 plt.show()
 plt.clf()
 
-numerical_col_names2 = ['G1', 'G2', 'G3']
-numerical_cols2 = df1[numerical_col_names2].columns.tolist()
-
 # Plot histograms for numerical variables
-df1[numerical_cols2].hist(bins=20, range=(0, 20), figsize=(10,5), grid=False)
-plt.show()
-plt.clf()
+grade_vars1 = ['G1', 'G2', 'G3']
+
+for i in grade_vars1:
+    df1[i].hist(bins=20, range=(0, 20), figsize=(6,3), grid=False)
+    plt.xlabel("Grades")
+    plt.ylabel("Frequency")
+    plt.title(f"Histogram of {i}")
+    plt.show()
+    plt.clf()
 
 
 # It appears that absences are centred around the single digits and are heavily skewed towards the right. It will be interesting to see the effects of absences at high values on grades.
@@ -183,17 +188,19 @@ plt.clf()
 
 # Step 3: Plotting Pairwise Plots of df1 variable G3 against absences, G1, and G2
 
-# In[7]:
+# In[15]:
 
 
 # Pairplot of G3 v absences
 sns.pairplot(data=df1, x_vars='absences', y_vars='G3')
+plt.title("Pairwise plot of G3 v Absences")
 plt.show()
 plt.clf()
 
 # Pairplot of G3 v G1
 sns.pairplot(data=df1, x_vars='G1', y_vars='G3')
 plt.gca().set_xlim(0, 20)
+plt.title("Pairwise plot of G3 v G1")
 plt.show()
 plt.clf()
 
@@ -201,6 +208,7 @@ plt.clf()
 # Pairplot of G3 v G2
 sns.pairplot(data=df1, x_vars='G2', y_vars='G3')
 plt.gca().set_xlim(0, 20)
+plt.title("Pairwise plot of G3 v G2")
 plt.show()
 plt.clf()
 
@@ -211,11 +219,11 @@ plt.clf()
 
 # Step 4: Plotting Countplots for df1 Categorical Variables
 
-# In[121]:
+# In[29]:
 
 
 # Get the categorical columns
-categorical_cols = df1.drop(numerical_col_names, axis=1).columns.tolist()
+categorical_cols = df1.drop(numerical_col_names1, axis=1).columns.tolist()
 
 num_plots = len(categorical_cols)
 num_cols = 4
@@ -225,6 +233,7 @@ num_rows = (num_plots + num_cols - 1) // num_cols
 plt.figure(figsize=(20, 40))
 for i, col in enumerate(categorical_cols):
     plt.subplot(num_rows, num_cols, i + 1)
+    plt.title(f"Countplot of {col}")
     sns.countplot(x=col, data=df1)
 
 plt.tight_layout()
@@ -235,13 +244,14 @@ plt.show()
 
 # Step 5: Plotting Boxplots of df1 variable G3 against Categorical Variables
 
-# In[122]:
+# In[30]:
 
 
 # plot boxplots for each categorical variable against the outcome variable 'G3'
 plt.figure(figsize=(20,40))
 for i, col in enumerate(categorical_cols):
     plt.subplot(num_rows, num_cols, i + 1)
+    plt.title(f"Boxplot of {col}")
     sns.boxplot(x=col, y='G3', data=df1)
 
 plt.tight_layout()
@@ -476,42 +486,49 @@ print(regression_ensemble(df1, 'G3', test_size=0.2, random_state=1))
 
 # Step 8: Plotting histograms for df2 numerical variables
 
-# In[12]:
+# In[34]:
 
 
 # Get the numerical columns
-numerical_col_names1 = ['absences']
-numerical_cols1 = df2[numerical_col_names1].columns.tolist()
+numerical_col_names2 = ['absences', 'G1', 'G2', 'G3']
 
 # Plot histograms for numerical variables
-df2[numerical_cols1].hist(bins=20, figsize=(10,5), grid=False)
+df2['absences'].hist(bins=20, figsize=(10,5), grid=False)
+plt.xlabel("Absences")
+plt.ylabel("Frequency")
+plt.title("Histogram of Absences")
 plt.show()
 plt.clf()
 
-numerical_col_names2 = ['G1', 'G2', 'G3']
-numerical_cols2 = df2[numerical_col_names2].columns.tolist()
-
 # Plot histograms for numerical variables
-df2[numerical_cols2].hist(bins=20, range=(0, 20), figsize=(10,5), grid=False)
-plt.show()
-plt.clf()
+grade_vars2 = ['G1', 'G2', 'G3']
+
+for i in grade_vars2:
+    df2[i].hist(bins=20, range=(0, 20), figsize=(6,3), grid=False)
+    plt.xlabel("Grades")
+    plt.ylabel("Frequency")
+    plt.title(f"Histogram of {i}")
+    plt.show()
+    plt.clf()
 
 
 # The histograms appear to have less outliers, smaller range, and more normal distributions.
 
 # Step 9: Plotting Pairwise Plots of df2 variable G3 against absences, G1, and G2
 
-# In[13]:
+# In[35]:
 
 
 # Pairplot of G3 v absences
 sns.pairplot(data=df2, x_vars='absences', y_vars='G3')
+plt.title("Pairwise plot of G3 v Absences")
 plt.show()
 plt.clf()
 
 # Pairplot of G3 v G1
 sns.pairplot(data=df2, x_vars='G1', y_vars='G3')
 plt.gca().set_xlim(0, 20)
+plt.title("Pairwise plot of G3 v G1")
 plt.show()
 plt.clf()
 
@@ -519,6 +536,7 @@ plt.clf()
 # Pairplot of G3 v G2
 sns.pairplot(data=df2, x_vars='G2', y_vars='G3')
 plt.gca().set_xlim(0, 20)
+plt.title("Pairwise plot of G3 v G2")
 plt.show()
 plt.clf()
 
@@ -527,11 +545,11 @@ plt.clf()
 
 # Step 10: Plotting Countplots for df2 Categorical Variables
 
-# In[136]:
+# In[36]:
 
 
 # Get the categorical columns
-categorical_cols = df1.drop(numerical_col_names, axis=1).columns.tolist()
+categorical_cols = df2.drop(numerical_col_names2, axis=1).columns.tolist()
 
 num_plots = len(categorical_cols)
 num_cols = 4
@@ -541,6 +559,7 @@ num_rows = (num_plots + num_cols - 1) // num_cols
 plt.figure(figsize=(20, 40))
 for i, col in enumerate(categorical_cols):
     plt.subplot(num_rows, num_cols, i + 1)
+    plt.title(f"Countplot of {col}")
     sns.countplot(x=col, data=df2)
 
 plt.tight_layout()
@@ -551,13 +570,14 @@ plt.show()
 
 # Step 11: Plotting Boxplots of df2 variable G3 against Categorical Variables
 
-# In[137]:
+# In[38]:
 
 
 # plot boxplots for each categorical variable against the outcome variable 'G3'
 plt.figure(figsize=(20,40))
 for i, col in enumerate(categorical_cols):
     plt.subplot(num_rows, num_cols, i + 1)
+    plt.title(f"Boxplot of {col}")
     sns.boxplot(x=col, y='G3', data=df2)
 
 plt.tight_layout()
